@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Notes</title>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+  <style>
+    body {
+      background-color: #f0f0f0; /* Light grey background color */
+      background-image: url(''); /* Path to your background image */
+      background-size: cover; /* Cover the entire background */
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      font-family: Arial, sans-serif; /* Optional: Change the font for a better look */
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 100%;
+      max-width: 800px; /* Adjust the max-width as needed */
+    }
+
+    /* Centering the main heading */
+    .container h1 {
+      text-align: center;
+      color: #333; /* Dark grey color for heading */
+    }
+
+    form button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 0;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    form button:hover {
+      background-color: #45a049;
+    }
+
+    button.btn.btn-primary {
+      background-color: #007bff;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 5px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button.btn.btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    button.btn.btn-danger {
+      background-color: #ff5252;
+    }
+
+    button.btn.btn-danger:hover {
+      background-color: red;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+
+    img {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>My Book Notes</h1>
+    <button onclick="window.location.href='/books/add-book'">Add Book</button>
+
+    <h2 class="books" style="text-align: center;">Books</h2>
+
+    <ul>
+      <% books.forEach(book => { %>
+        <li>
+          <h3><%= book.title %> by <%= book.author %></h3>
+          <p>Rating: <%= book.rating %></p>
+          <p>Date Read: <%= book.date_read %></p>
+          <p><img src="<%= book.cover_url %>" alt="Book Cover" width="100"></p>
+          <p><%= book.notes %></p>
+          <div class="button-container">
+            <button onclick="window.location.href='/books/<%= book.id %>/edit'" class="btn btn-primary">Edit</button>
+
+            <form action="/books/<%= book.id %>?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html>
